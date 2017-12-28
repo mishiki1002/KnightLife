@@ -3,6 +3,7 @@ package org.oso.productions.knightlife;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,9 +13,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    
+
+    TextView content;
+    String TAG;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +35,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        content = (TextView) findViewById(R.id.main_content);
+        TAG = "MAIN";
     }
 
     @Override
@@ -70,28 +78,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_feature) {
-
+        if (id == R.id.nav_home) {
+            Log.d(TAG, "Nav Home Selelcted");
+            content.setText("Home");
+        } else if (id == R.id.nav_feature) {
+            Log.d(TAG, "Nav Feature Selected");
+            content.setText("Feature");
         } else if (id == R.id.nav_opinion) {
-
+            Log.d(TAG, "Nav Opinion Selected");
+            content.setText("Opinion");
         } else if (id == R.id.nav_news) {
-
+            Log.d(TAG, "Nav News Selected");
+            content.setText("News");
         } else if (id == R.id.nav_sports) {
-
+            Log.d(TAG, "Nav Sports Selelcted");
+            content.setText("Sports");
         } else if (id == R.id.nav_AE) {
-
+            Log.d(TAG, "Nav AE Selected");
+            content.setText("A&E");
         } else if (id == R.id.nav_uncatagorized) {
-
+            Log.d(TAG, "Nav Uncatagorized Selected");
+            content.setText("Uncatagorized");
         } else if (id == R.id.nav_comics) {
-
+            Log.d(TAG, "Nav Comics Selected");
+            content.setText("Comics");
         } else if (id == R.id.nav_videos) {
-
+            Log.d(TAG, "Nav Videos Selected");
+            content.setText("Videos");
         } else if (id == R.id.nav_poll) {
-
+            Log.d(TAG, "Nav Poll Selected");
+            content.setText("Polls");
         } else if (id == R.id.nav_share) {
-
+            Log.d(TAG, "Nav Share Selected");
+            content.setText("Share");
         } else if (id == R.id.nav_send) {
-
+            Log.d(TAG, "Nav Send Selected");
+            content.setText("Send");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
