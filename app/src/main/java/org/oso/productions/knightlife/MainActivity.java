@@ -13,16 +13,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -72,13 +70,23 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_feature) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_opinion) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_news) {
+
+        } else if (id == R.id.nav_sports) {
+
+        } else if (id == R.id.nav_AE) {
+
+        } else if (id == R.id.nav_uncatagorized) {
+
+        } else if (id == R.id.nav_comics) {
+
+        } else if (id == R.id.nav_videos) {
+
+        } else if (id == R.id.nav_poll) {
 
         } else if (id == R.id.nav_share) {
 
