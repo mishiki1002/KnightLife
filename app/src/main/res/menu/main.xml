@@ -6,4 +6,9 @@
         android:orderInCategory="100"
         android:title="Refresh"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_open"
+        android:orderInCategory="200"
+        android:title="Open In Browser"
+        app:showAsAction="never" />
 </menu>

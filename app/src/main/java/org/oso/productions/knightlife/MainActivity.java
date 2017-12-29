@@ -1,5 +1,7 @@
 package org.oso.productions.knightlife;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -112,6 +114,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.action_refresh) {
             website.loadUrl(url);
             return true;
+        } else if (id == R.id.action_open) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(url));
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -176,9 +182,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_share) {
             Log.d(TAG, "Nav Share Selected");
             content.setText("Share");
-        } else if (id == R.id.nav_send) {
-            Log.d(TAG, "Nav Send Selected");
-            content.setText("Send");
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, url);
+            startActivity(Intent.createChooser(shareIntent, "Share link using"));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
