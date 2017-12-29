@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         + "head.parentNode.removeChild(head);" +
                         "})()");
                 Log.d(TAG, "Removing Naviagtion Menu 3 REPLACE");
-                
+
                 view.loadUrl("javascript:(function() { " +
                         "var head = document.getElementsByTagName('div')[1];"
                         + "head.parentNode.removeChild(head);" +
@@ -109,7 +109,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_refresh) {
+            website.loadUrl(url);
             return true;
         }
 
