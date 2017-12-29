@@ -18,4 +18,9 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <WebView  xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/main_webview"
+        android:elevation="3dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
 </android.support.constraint.ConstraintLayout>
