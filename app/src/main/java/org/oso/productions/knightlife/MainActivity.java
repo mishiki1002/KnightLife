@@ -69,8 +69,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         + "head.parentNode.removeChild(head);" +
                         "})()");
                 Log.d(TAG, "Removing Naviagtion Menu 3 REPLACE");
+                
                 view.loadUrl("javascript:(function() { " +
-                        "var head = document.getElementById('menu-catergories-container');"
+                        "var head = document.getElementsByTagName('div')[1];"
                         + "head.parentNode.removeChild(head);" +
                         "})()");
 
