@@ -1,10 +1,13 @@
 package org.oso.productions.knightlife;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -18,7 +21,10 @@ import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -27,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     WebView website;
     String url;
+
+    String m_Text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         WebSettings webSettings = website.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
+        website.setVisibility(WebView.INVISIBLE);
+
         website.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -58,32 +68,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
             @Override
-            public void onPageFinished(WebView view, String url)
-            {
+            public void onPageFinished(WebView view, String url) {
                 Log.d(TAG, "Removing Navigation 1 REPLACE");
                 view.loadUrl("javascript:(function() { " +
                         "var head = document.getElementsByTagName('header')[0];"
                         + "head.parentNode.removeChild(head);" +
                         "})()");
+
                 Log.d(TAG, "Removing Search 2 REPLACE");
                 view.loadUrl("javascript:(function() { " +
                         "var head = document.getElementsByTagName('form')[0];"
                         + "head.parentNode.removeChild(head);" +
                         "})()");
-                Log.d(TAG, "Removing Naviagtion Menu 3 REPLACE");
 
+                Log.d(TAG, "Removing Naviagtion Menu 3 REPLACE");
                 view.loadUrl("javascript:(function() { " +
                         "var head = document.getElementsByTagName('div')[1];"
                         + "head.parentNode.removeChild(head);" +
                         "})()");
-
             }
         });
 
-        content = (TextView) findViewById(R.id.main_content);
         TAG = "MAIN";
 
         website.loadUrl(url);
+        website.setVisibility(WebView.VISIBLE);
     }
 
     @Override
@@ -118,6 +127,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse(url));
             startActivity(intent);
+        } else if (id == R.id.action_search) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("What would you like to search?");
+
+            // Set up the input
+            final EditText input = new EditText(this);
+            // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_TEXT);
+            builder.setView(input);
+
+            // Set up the buttons
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    m_Text = input.getText().toString();
+                    url = "https://knightlifenews.com/?s=" + m_Text;
+                    website.loadUrl(url);
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            builder.show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -131,57 +167,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_home) {
             Log.d(TAG, "Nav Home Selelcted");
-            content.setText("Home");
             url = "https://knightlifenews.com/";
             website.loadUrl(url);
         } else if (id == R.id.nav_feature) {
             Log.d(TAG, "Nav Feature Selected");
-            content.setText("Feature");
             url = "https://knightlifenews.com/category/feature/";
             website.loadUrl(url);
         } else if (id == R.id.nav_opinion) {
             Log.d(TAG, "Nav Opinion Selected");
-            content.setText("Opinion");
             url = "https://knightlifenews.com/category/opinion/";
             website.loadUrl(url);
         } else if (id == R.id.nav_news) {
             Log.d(TAG, "Nav News Selected");
-            content.setText("News");
             url = "https://knightlifenews.com/category/news/";
             website.loadUrl(url);
         } else if (id == R.id.nav_sports) {
             Log.d(TAG, "Nav Sports Selelcted");
-            content.setText("Sports");
             url = "https://knightlifenews.com/category/sports/";
             website.loadUrl(url);
         } else if (id == R.id.nav_AE) {
             Log.d(TAG, "Nav AE Selected");
-            content.setText("A&E");
             url = "https://knightlifenews.com/category/ae/";
             website.loadUrl(url);
         } else if (id == R.id.nav_uncatagorized) {
             Log.d(TAG, "Nav Uncatagorized Selected");
-            content.setText("Uncatagorized");
             url = "https://knightlifenews.com/category/uncategorized/";
             website.loadUrl(url);
         } else if (id == R.id.nav_comics) {
             Log.d(TAG, "Nav Comics Selected");
-            content.setText("Comics");
             url = "https://knightlifenews.com/category/comics/";
             website.loadUrl(url);
         } else if (id == R.id.nav_videos) {
             Log.d(TAG, "Nav Videos Selected");
-            content.setText("Videos");
             url = "https://knightlifenews.com/category/videos/";
             website.loadUrl(url);
         } else if (id == R.id.nav_poll) {
             Log.d(TAG, "Nav Poll Selected");
-            content.setText("Polls");
             url = "https://knightlifenews.com/category/poll/";
             website.loadUrl(url);
         } else if (id == R.id.nav_share) {
             Log.d(TAG, "Nav Share Selected");
-            content.setText("Share");
+            url = website.getUrl();
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_TEXT, url);
