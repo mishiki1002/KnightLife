@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         webSettings.setJavaScriptEnabled(true);
 
         website.setVisibility(WebView.INVISIBLE);
+        webSettings.setAppCacheEnabled(true);
 
         website.setWebViewClient(new WebViewClient() {
             @Override
