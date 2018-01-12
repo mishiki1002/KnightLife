@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             url = website.getUrl();
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
-            shareIntent.putExtra(Intent.EXTRA_TEXT, url);
+            shareIntent.putExtra(Intent.EXTRA_TEXT, website.getUrl());
             startActivity(Intent.createChooser(shareIntent, "Share link using"));
         }
 
