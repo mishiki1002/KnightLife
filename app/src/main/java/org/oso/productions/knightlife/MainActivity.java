@@ -221,6 +221,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             } catch(Exception e) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/LNknightlife/  ")));
             }
+        } else if(id == R.id.nav_twitter) {
+            Log.d(TAG, "Nav Twitter Selected");
+            try {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/KnightLifeNews"));
+                startActivity(intent);
+            } catch(Exception e) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/KnightLifeNews")));
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
