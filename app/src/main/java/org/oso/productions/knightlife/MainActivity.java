@@ -1,11 +1,14 @@
 package org.oso.productions.knightlife;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.util.Log;
@@ -22,9 +25,12 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.concurrent.TimeUnit;
+
+import static android.view.View.GONE;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -36,10 +42,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     String m_Text;
 
+    NotificationCompat.Builder mBuilder;
+    NotificationManager mNotifyMgr;
+    int mNotificationId;
+
+    boolean loadingFinished;
+    boolean redirect;
+
+    private ProgressBar spinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        spinner = (ProgressBar)findViewById(R.id.progressBar1);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -55,11 +73,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         url = "https://knightlifenews.com/";
         website = (WebView) findViewById(R.id.main_webview);
 
-        WebSettings webSettings = website.getSettings();
+
+        final WebSettings webSettings = website.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
         website.setVisibility(WebView.INVISIBLE);
         webSettings.setAppCacheEnabled(true);
+
+        mNotificationId = 001;
+
+        mBuilder = new NotificationCompat.Builder(this);
+        mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         website.setWebViewClient(new WebViewClient() {
             @Override
@@ -87,13 +111,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         "var head = document.getElementsByTagName('div')[1];"
                         + "head.parentNode.removeChild(head);" +
                         "})()");
+
+                if(!redirect){
+                    loadingFinished = true;
+                }
+
+                if(loadingFinished && !redirect){
+                    website.setVisibility(WebView.VISIBLE);
+                } else{
+                    redirect = false;
+                }
             }
         });
 
         TAG = "MAIN";
 
         website.loadUrl(url);
-        website.setVisibility(WebView.VISIBLE);
     }
 
     @Override
@@ -105,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -122,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
+            website.setVisibility(WebView.INVISIBLE);
             website.loadUrl(url);
             return true;
         } else if (id == R.id.action_open) {
@@ -144,6 +179,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void onClick(DialogInterface dialog, int which) {
                     m_Text = input.getText().toString();
                     url = "https://knightlifenews.com/?s=" + m_Text;
+                    website.setVisibility(WebView.INVISIBLE);
                     website.loadUrl(url);
                 }
             });
@@ -169,42 +205,52 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_home) {
             Log.d(TAG, "Nav Home Selelcted");
             url = "https://knightlifenews.com/";
+            website.setVisibility(WebView.INVISIBLE);
             website.loadUrl(url);
         } else if (id == R.id.nav_feature) {
             Log.d(TAG, "Nav Feature Selected");
             url = "https://knightlifenews.com/category/feature/";
+            website.setVisibility(WebView.INVISIBLE);
             website.loadUrl(url);
         } else if (id == R.id.nav_opinion) {
             Log.d(TAG, "Nav Opinion Selected");
             url = "https://knightlifenews.com/category/opinion/";
+            website.setVisibility(WebView.INVISIBLE);
             website.loadUrl(url);
         } else if (id == R.id.nav_news) {
             Log.d(TAG, "Nav News Selected");
             url = "https://knightlifenews.com/category/news/";
+            website.setVisibility(WebView.INVISIBLE);
             website.loadUrl(url);
         } else if (id == R.id.nav_sports) {
             Log.d(TAG, "Nav Sports Selelcted");
             url = "https://knightlifenews.com/category/sports/";
+            website.setVisibility(WebView.INVISIBLE);
             website.loadUrl(url);
         } else if (id == R.id.nav_AE) {
             Log.d(TAG, "Nav AE Selected");
             url = "https://knightlifenews.com/category/ae/";
+            website.setVisibility(WebView.INVISIBLE);
             website.loadUrl(url);
         } else if (id == R.id.nav_uncatagorized) {
             Log.d(TAG, "Nav Uncatagorized Selected");
             url = "https://knightlifenews.com/category/uncategorized/";
+            website.setVisibility(WebView.INVISIBLE);
             website.loadUrl(url);
         } else if (id == R.id.nav_comics) {
             Log.d(TAG, "Nav Comics Selected");
             url = "https://knightlifenews.com/category/comics/";
+            website.setVisibility(WebView.INVISIBLE);
             website.loadUrl(url);
         } else if (id == R.id.nav_videos) {
             Log.d(TAG, "Nav Videos Selected");
             url = "https://knightlifenews.com/category/videos/";
+            website.setVisibility(WebView.INVISIBLE);
             website.loadUrl(url);
         } else if (id == R.id.nav_poll) {
             Log.d(TAG, "Nav Poll Selected");
             url = "https://knightlifenews.com/category/poll/";
+            website.setVisibility(WebView.INVISIBLE);
             website.loadUrl(url);
         } else if (id == R.id.nav_share) {
             Log.d(TAG, "Nav Share Selected");
@@ -234,5 +280,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void makeNotification(String title, String content, int id){
+        mBuilder.setSmallIcon(R.mipmap.ic_launcher_round);
+        mBuilder.setContentTitle(title);
+        mBuilder.setContentText(content);
+
+        Intent intent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        mBuilder.setContentIntent(pendingIntent);
+
+        mNotifyMgr.notify(id, mBuilder.build());
     }
 }
