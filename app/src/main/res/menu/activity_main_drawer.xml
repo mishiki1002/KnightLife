@@ -6,34 +6,43 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24px"
             android:title="Home" />
         <item
             android:id="@+id/nav_feature"
+            android:icon="@drawable/ic_whatshot_black_24px"
             android:title="Feature" />
         <item
             android:id="@+id/nav_opinion"
+            android:icon="@drawable/ic_comment_question_24px"
             android:title="Opinion" />
         <item
             android:id="@+id/nav_news"
+            android:icon="@drawable/ic_newspaper_24px"
             android:title="News" />
         <item
             android:id="@+id/nav_sports"
+            android:icon="@drawable/ic_basketball_24px"
             android:title="Sports" />
         <item
             android:id="@+id/nav_AE"
+            android:icon="@drawable/ic_menu_slideshow"
             android:title="AE" />
         <item
             android:id="@+id/nav_uncatagorized"
+            android:icon="@drawable/ic_style_black_24px"
             android:title="Uncatagorized" />
         <item
             android:id="@+id/nav_comics"
+            android:icon="@drawable/ic_view_quilt_black_24px"
             android:title="Comics" />
         <item
             android:id="@+id/nav_videos"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_theaters_black_24px"
             android:title="Videos" />
         <item
             android:id="@+id/nav_poll"
+            android:icon="@drawable/ic_assessment_black_24px"
             android:title="Polls" />
     </group>
 
@@ -45,9 +54,11 @@
                 android:title="Share" />
             <item
                 android:id="@+id/nav_facebook"
+                android:icon="@drawable/ic_facebook_box_24px"
                 android:title="Facebook Page"/>
             <item
                 android:id="@+id/nav_twitter"
+                android:icon="@drawable/ic_twitter_box_24px"
                 android:title="Twitter Account"/>
         </menu>
     </item>
