@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="org.oso.productions.knightlife.AboutActivity"
+    tools:showIn="@layout/activity_about">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="22dp"
+        android:layout_margin="2dp"
+        android:text="About Me"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:text="\n\tThis app was made by me as a side project to exersize my programming skills and work through the problems of makning an android app. I had previously tried to make several apps before but none of them ever really did anything. So one day my cousin came over and told me about how they the newspaper at the school had been wanting an app. He said it would help them reach more readers and potential sponsers.\n\n\tMe being me i decided that this would be a golden oprotunity to exersize my skills. Almost immediatly after having the conversation with him i decided to sit down and start working on it. Half an our later i had a proof of concept. Loaded onto both my and his phones. \n\n\t Honestly i think that this was a good oprotunity for me to try to do and im glad id did. It improved my programming skills and also gave me real life challenges that one would face in a work enviorment. \n\n\t I will be looking forward to continuing my carrer as a programmer and am hoping to go to college studying computer science and electrical engineering. I will continue to up keep this app as well as any future apps I make.\n\n\t If you have any tips or suggestions you can email me at brownbear1002@gmail.com Keep in mind though that i do not manage or create the content. I only manage the app. I will not remove any articles for you, nor will i change the content. "
+            android:textColor="#000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            tools:layout_editor_absoluteX="16dp" />
+
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

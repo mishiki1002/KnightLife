@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.RemoteMessage;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     boolean loadingFinished;
     boolean redirect;
+
+    RemoteMessage remoteMessage;
 
     private ProgressBar spinner;
 
@@ -123,7 +126,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d(TAG, "Refreshed token: " + refreshedToken);
-
 
         website.loadUrl(url);
     }
@@ -258,7 +260,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_TEXT, website.getUrl());
             startActivity(Intent.createChooser(shareIntent, "Share link using"));
-        } else if(id == R.id.nav_facebook) {
+        } else if (id == R.id.nav_about) {
+            Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+            startActivity(intent);
+        }
+        else if(id == R.id.nav_facebook) {
             Log.d(TAG, "Nav Facebook Selected");
             try {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/LNknightlife/"));
@@ -282,7 +288,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void makeNotification(String title, String content, int id){
-        mBuilder.setSmallIcon(R.mipmap.ic_launcher_round);
+        mBuilder.setSmallIcon(R.drawable.ic_whatshot_black_24px);
         mBuilder.setContentTitle(title);
         mBuilder.setContentText(content);
 
@@ -292,5 +298,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mBuilder.setContentIntent(pendingIntent);
 
         mNotifyMgr.notify(id, mBuilder.build());
+    }
+
+    private void getWebNotifications(){
+        if(remoteMessage.getData().size() > 0) {
+            mBuilder.setSmallIcon(R.drawable.ic_notification_);
+            mBuilder.setContentTitle(remoteMessage.getNotification().getTitle());
+            mBuilder.setContentText(remoteMessage.getNotification().getBody());
+
+            Intent intent = new Intent(this, MainActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+            mBuilder.setContentIntent(pendingIntent);
+
+            mNotifyMgr.notify(001, mBuilder.build());
+        } else {
+            Log.d(TAG, "No Web Notifications");
+        }
     }
 }
