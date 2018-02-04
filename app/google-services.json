@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "828910234673",
+    "firebase_url": "https://knightlife-news.firebaseio.com",
+    "project_id": "knightlife-news",
+    "storage_bucket": "knightlife-news.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:828910234673:android:8744bbf785d78aff",
+        "android_client_info": {
+          "package_name": "org.oso.productions.knightlife"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "828910234673-2221iqa93bvrbmb1banu07irkfui5l14.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.oso.productions.knightlife",
+            "certificate_hash": "aebc052644421a91857229f5410eff19726939f0"
+          }
+        },
+        {
+          "client_id": "828910234673-7jdp8e4bp25bduc4hbouc10trpingg0j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPgGXT_ai-39MKQGcsku_M1AMNcXAKlKs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "828910234673-7jdp8e4bp25bduc4hbouc10trpingg0j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

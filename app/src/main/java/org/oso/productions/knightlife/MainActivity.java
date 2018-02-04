@@ -23,7 +23,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
@@ -51,10 +50,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.d("TOKEN", refreshedToken);
-
 
         spinner = (ProgressBar)findViewById(R.id.progressBar1);
 
@@ -125,6 +120,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         TAG = "MAIN";
+
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Log.d(TAG, "Refreshed token: " + refreshedToken);
+
 
         website.loadUrl(url);
     }
