@@ -6,13 +6,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -28,13 +25,10 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.util.concurrent.TimeUnit;
-
-import static android.view.View.GONE;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    TextView content;
     String TAG;
 
     WebView website;
@@ -51,10 +45,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private ProgressBar spinner;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Log.d("TOKEN", refreshedToken);
+
 
         spinner = (ProgressBar)findViewById(R.id.progressBar1);
 
@@ -272,7 +272,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             try {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/KnightLifeNews"));
                 startActivity(intent);
-            } catch(Exception e) {
+            } catch (Exception e) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/KnightLifeNews")));
             }
         }
