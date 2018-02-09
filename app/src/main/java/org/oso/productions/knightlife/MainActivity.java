@@ -260,11 +260,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_TEXT, website.getUrl());
             startActivity(Intent.createChooser(shareIntent, "Share link using"));
-        } else if (id == R.id.nav_about) {
-            Intent intent = new Intent(MainActivity.this, AboutActivity.class);
-            startActivity(intent);
-        }
-        else if(id == R.id.nav_facebook) {
+        } else if(id == R.id.nav_facebook) {
             Log.d(TAG, "Nav Facebook Selected");
             try {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/LNknightlife/"));
